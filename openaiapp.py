@@ -8,7 +8,7 @@ app = Flask(__name__)
 # 获取 OpenAI API Key
 print(os.getenv("OPENAI_API_KEY"))
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
+print(os.getenv("OPENAI_API_KEY"))
 @app.route("/analyze_trip", methods=["POST"])
 def analyze_trip():
     try:
