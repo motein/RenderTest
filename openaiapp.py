@@ -9,6 +9,11 @@ app = Flask(__name__)
 print(os.getenv("OPENAI_API_KEY"))
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 print(os.getenv("OPENAI_API_KEY"))
+
+@app.route('/', methods=['GET'])
+def index():
+    return "Hello, this is the OpenAI API integration!"
+
 @app.route("/analyze_trip", methods=["POST"])
 def analyze_trip():
     try:
