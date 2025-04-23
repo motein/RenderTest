@@ -56,7 +56,7 @@ def analyze_trip():
         )
 
         result = response.choices[0].message.content.strip()
-        # return result
+        print(result)
 
         # 解析 JSON 格式
         try:
