@@ -42,12 +42,10 @@ def analyze_trip():
   "start_time": ""
 }}
 """
-
         # 使用新版本 openai SDK 的调用方式
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.2
+            model="gpt-4",
+            messages=[{"role": "user", "content": prompt}]
         )
 
         result = response.choices[0].message.content
