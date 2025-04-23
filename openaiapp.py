@@ -44,7 +44,7 @@ def analyze_trip():
 """
         # 使用新版本 openai SDK 的调用方式
         response = client.chat.completions.create(
-            model="gpt-4-turbo",
+            model="gpt-3.5-turbo",
             messages=[{"role": "user", "content": prompt}]
         )
 
