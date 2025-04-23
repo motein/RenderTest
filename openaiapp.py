@@ -3,12 +3,16 @@ from openai import OpenAI
 import os
 import json
 
+print(os.getenv("OPENAI_ORGANIZATION"))
+
 app = Flask(__name__)
 
 # 获取 OpenAI API Key
 print(os.getenv("OPENAI_API_KEY"))
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 print(os.getenv("OPENAI_API_KEY"))
+
+# client = OpenAI(api_key=OPENAI_API_KEY)
 
 @app.route('/', methods=['GET'])
 def index():
@@ -44,19 +48,23 @@ def analyze_trip():
 """
         # 使用新版本 openai SDK 的调用方式
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[{"role": "user", "content": prompt}]
+        model="gpt-4o-mini",
+        store=True,
+        messages=[
+            {"role": "user", "content": "write a haiku about ai"}
+        ]
         )
 
-        result = response.choices[0].message.content
+        result = response.choices[0].message.content.strip()
+        return result
 
-        # 解析 JSON 格式
-        try:
-            structured_data = json.loads(result)
-        except json.JSONDecodeError:
-            return jsonify({"error": "Failed to parse OpenAI response", "raw": result}), 500
+        # # 解析 JSON 格式
+        # try:
+        #     structured_data = json.loads(result)
+        # except json.JSONDecodeError:
+        #     return jsonify({"error": "Failed to parse OpenAI response", "raw": result}), 500
 
-        return jsonify(structured_data)
+        # return jsonify(structured_data)
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
