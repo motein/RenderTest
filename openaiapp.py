@@ -47,15 +47,21 @@ def analyze_trip():
 }}
 """
         # 使用新版本 openai SDK 的调用方式
+        # response = client.chat.completions.create(
+        # model="gpt-4o-mini",
+        # store=True,
+        # messages=[
+        #     {"role": "user", "content": prompt}
+        # ]
+        # )
+
         response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        store=True,
-        messages=[
-            {"role": "user", "content": prompt}
-        ]
+            model="gpt-3.5-turbo",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.2
         )
 
-        result = response.choices[0].message.content.strip()
+        result = response.choices[0].message.content
         print(result)
 
         # 解析 JSON 格式
