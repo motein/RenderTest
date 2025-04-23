@@ -51,20 +51,20 @@ def analyze_trip():
         model="gpt-4o-mini",
         store=True,
         messages=[
-            {"role": "user", "content": "write a haiku about ai"}
+            {"role": "user", "content": prompt}
         ]
         )
 
         result = response.choices[0].message.content.strip()
-        return result
+        # return result
 
-        # # 解析 JSON 格式
-        # try:
-        #     structured_data = json.loads(result)
-        # except json.JSONDecodeError:
-        #     return jsonify({"error": "Failed to parse OpenAI response", "raw": result}), 500
+        # 解析 JSON 格式
+        try:
+            structured_data = json.loads(result)
+        except json.JSONDecodeError:
+            return jsonify({"error": "Failed to parse OpenAI response", "raw": result}), 500
 
-        # return jsonify(structured_data)
+        return jsonify(structured_data)
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
